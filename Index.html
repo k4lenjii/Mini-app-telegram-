@@ -3,14 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mini App Telegram Pro</title>
+<title>Mini App Telegram Simple</title>
+
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 <style>
 :root {
   --main-color: #2ea6ff;
-  --secondary-color: #ff6b6b;
-  --tertiary-color: #34d399;
   --bg-color: #f0f4f8;
   --text-color: #1a1a1a;
   --button-radius: 12px;
@@ -34,15 +33,12 @@ button {
   font-size: 18px;
   border-radius: var(--button-radius);
   border: none;
-  margin: 8px;
+  margin: 10px;
   cursor: pointer;
   color: white;
+  background: var(--main-color);
   transition: background 0.2s;
 }
-
-.button-main { background: var(--main-color); }
-.button-secondary { background: var(--secondary-color); }
-.button-tertiary { background: var(--tertiary-color); }
 
 button:hover {
   filter: brightness(0.85);
@@ -56,13 +52,14 @@ button:hover {
 </head>
 <body>
 
-<h1>🚀 Mini App Pro</h1>
+<h1>🚀 Mini App Telegram</h1>
 <p id="user"></p>
+
 <div id="content">
-  <p>Bienvenue ! Choisis une page :</p>
-  <button class="button-main" onclick="showPage('page1')">Page 1</button>
-  <button class="button-secondary" onclick="showPage('page2')">Page 2</button>
-  <button class="button-tertiary" onclick="showPage('page3')">Page 3</button>
+  <p>Choisis une page :</p>
+  <button onclick="showPage('page1')">Page 1</button>
+  <button onclick="showPage('page2')">Page 2</button>
+  <button onclick="showPage('page3')">Page 3</button>
 </div>
 
 <script>
@@ -75,70 +72,25 @@ if(user) {
   document.getElementById('user').innerText = 'Salut ' + user.first_name + ' !';
 }
 
-// Pages et sous-menus
+// Pages avec texte modifiable
 const pages = {
-  page1: `
-    <h2>Page 1</h2>
-    <p>Voici la première page !</p>
-    <button class="button-secondary" onclick="showSubPage('sub1')">Sous-menu 1</button>
-    <button class="button-tertiary" onclick="showSubPage('sub2')">Sous-menu 2</button>
-    <button class="button-main" onclick="showMenu()">Retour au menu</button>
-  `,
-  page2: `
-    <h2>Page 2</h2>
-    <p>Bienvenue sur la deuxième page !</p>
-    <button class="button-secondary" onclick="showSubPage('sub3')">Sous-menu 3</button>
-    <button class="button-main" onclick="showMenu()">Retour au menu</button>
-  `,
-  page3: `
-    <h2>Page 3</h2>
-    <p>Voici la troisième page !</p>
-    <button class="button-secondary" onclick="showSubPage('sub4')">Sous-menu 4</button>
-    <button class="button-main" onclick="showMenu()">Retour au menu</button>
-  `,
+  page1: `<h2>Page 1</h2><p>Ici tu peux mettre le texte que tu veux pour la Page 1.</p><button onclick="showMenu()">Retour au menu</button>`,
+  page2: `<h2>Page 2</h2><p>Ici tu peux mettre le texte que tu veux pour la Page 2.</p><button onclick="showMenu()">Retour au menu</button>`,
+  page3: `<h2>Page 3</h2><p>Ici tu peux mettre le texte que tu veux pour la Page 3.</p><button onclick="showMenu()">Retour au menu</button>`
 };
 
-// Sous-pages
-const subPages = {
-  sub1: `
-    <h3>Sous-menu 1</h3>
-    <p>Info supplémentaire sur page 1</p>
-    <button class="button-main" onclick="showPage('page1')">Retour</button>
-  `,
-  sub2: `
-    <h3>Sous-menu 2</h3>
-    <p>Autre info sur page 1</p>
-    <button class="button-main" onclick="showPage('page1')">Retour</button>
-  `,
-  sub3: `
-    <h3>Sous-menu 3</h3>
-    <p>Info supplémentaire sur page 2</p>
-    <button class="button-main" onclick="showPage('page2')">Retour</button>
-  `,
-  sub4: `
-    <h3>Sous-menu 4</h3>
-    <p>Info supplémentaire sur page 3</p>
-    <button class="button-main" onclick="showPage('page3')">Retour</button>
-  `
-};
-
-// Afficher une page principale
+// Afficher une page
 function showPage(page) {
   document.getElementById('content').innerHTML = pages[page];
-}
-
-// Afficher une sous-page
-function showSubPage(sub) {
-  document.getElementById('content').innerHTML = subPages[sub];
 }
 
 // Retour au menu principal
 function showMenu() {
   document.getElementById('content').innerHTML = `
-    <p>Bienvenue ! Choisis une page :</p>
-    <button class="button-main" onclick="showPage('page1')">Page 1</button>
-    <button class="button-secondary" onclick="showPage('page2')">Page 2</button>
-    <button class="button-tertiary" onclick="showPage('page3')">Page 3</button>
+    <p>Choisis une page :</p>
+    <button onclick="showPage('page1')">Page 1</button>
+    <button onclick="showPage('page2')">Page 2</button>
+    <button onclick="showPage('page3')">Page 3</button>
   `;
 }
 </script>
