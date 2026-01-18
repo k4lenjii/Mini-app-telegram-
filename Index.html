@@ -3,17 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mini App Telegram Simple</title>
+<title>Mini App Telegram Dark</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 <style>
 :root {
-  --main-color: #2ea6ff;
-  --bg-color: #f0f4f8;
-  --text-color: #1a1a1a;
+  --bg-color: #121212; /* Fond sombre */
+  --text-color: #f0f0f0; /* Texte clair */
   --button-radius: 12px;
   --button-padding: 15px 25px;
+  --button-yellow: #FFD700; /* Jaune Frappe */
+  --button-darkgreen: #008000;  /* BEUH STATES sombre */
+  --button-red: #FF3B30;    /* Produit Puissant */
 }
 
 body {
@@ -25,7 +27,7 @@ body {
 }
 
 h1 {
-  color: var(--main-color);
+  color: #2ea6ff;
 }
 
 button {
@@ -36,30 +38,41 @@ button {
   margin: 10px;
   cursor: pointer;
   color: white;
-  background: var(--main-color);
   transition: background 0.2s;
 }
 
-button:hover {
-  filter: brightness(0.85);
-}
+.button-yellow { background: var(--button-yellow); color: #000; }
+.button-yellow:hover { filter: brightness(0.85); }
+
+.button-darkgreen { background: var(--button-darkgreen); }
+.button-darkgreen:hover { filter: brightness(0.85); }
+
+.button-red { background: var(--button-red); }
+.button-red:hover { filter: brightness(0.85); }
 
 #content {
   margin: 20px 0;
   font-size: 16px;
 }
+
+.page-text {
+  text-align: center;
+  line-height: 1.6;
+  margin: 15px auto;
+  max-width: 500px;
+}
 </style>
 </head>
 <body>
 
-<h1>🚀 Mini App Telegram</h1>
+<h1>COFFEHAZE78 🏆🚚</h1>
 <p id="user"></p>
 
 <div id="content">
   <p>Choisis une page :</p>
-  <button onclick="showPage('page1')">Page 1</button>
-  <button onclick="showPage('page2')">Page 2</button>
-  <button onclick="showPage('page3')">Page 3</button>
+  <button class="button-yellow" onclick="showPage('page1')">Jaune Frappe 🔥🇲🇦</button>
+  <button class="button-darkgreen" onclick="showPage('page2')">BEUH STATES 🇺🇸</button>
+  <button class="button-red" onclick="showPage('page3')">Produit Puissant 🥵🔞</button>
 </div>
 
 <script>
@@ -72,11 +85,39 @@ if(user) {
   document.getElementById('user').innerText = 'Salut ' + user.first_name + ' !';
 }
 
-// Pages avec texte modifiable
+// Pages avec texte centré
 const pages = {
-  page1: `<h2>Page 1</h2><p>Ici tu peux mettre le texte que tu veux pour la Page 1.</p><button onclick="showMenu()">Retour au menu</button>`,
-  page2: `<h2>Page 2</h2><p>Ici tu peux mettre le texte que tu veux pour la Page 2.</p><button onclick="showMenu()">Retour au menu</button>`,
-  page3: `<h2>Page 3</h2><p>Ici tu peux mettre le texte que tu veux pour la Page 3.</p><button onclick="showMenu()">Retour au menu</button>`
+  page1: `<h2>Jaune Frappe 🔥🇲🇦</h2>
+  <p class="page-text">
+  3g = 10€<br>
+  6g = 20€<br>
+  10g = 30€<br>
+  18g = 50€
+  </p>
+  <button class="button-yellow" onclick="showMenu()">Retour au menu</button>`,
+
+  page2: `<h2>BEUH STATES 🇺🇸</h2>
+  <p class="page-text">
+  50g = 300€<br>
+  100g = 550€
+  </p>
+  <button class="button-darkgreen" onclick="showMenu()">Retour au menu</button>`,
+
+  page3: `<h2>Produit Puissant 🥵🔞</h2>
+  <p class="page-text">
+  Frozen Prenium 🔥 ❄️ :<br>
+  2g = 20€<br>
+  5g = 50€<br>
+  10g = 90€<br><br>
+  Static ⚡🔥 :<br>
+  2g = 10€<br>
+  4g = 20€<br>
+  10g = 50€<br>
+  25g = 100€<br><br>
+  Piatella 🍯🔥 :<br>
+  1g = 40€
+  </p>
+  <button class="button-red" onclick="showMenu()">Retour au menu</button>`
 };
 
 // Afficher une page
@@ -88,9 +129,9 @@ function showPage(page) {
 function showMenu() {
   document.getElementById('content').innerHTML = `
     <p>Choisis une page :</p>
-    <button onclick="showPage('page1')">Page 1</button>
-    <button onclick="showPage('page2')">Page 2</button>
-    <button onclick="showPage('page3')">Page 3</button>
+    <button class="button-yellow" onclick="showPage('page1')">Jaune Frappe 🔥🇲🇦</button>
+    <button class="button-darkgreen" onclick="showPage('page2')">BEUH STATES 🇺🇸</button>
+    <button class="button-red" onclick="showPage('page3')">Produit Puissant 🥵🔞</button>
   `;
 }
 </script>
