@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mini App Telegram Améliorée</title>
+<title>Mini App Telegram Multi-Page</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
@@ -44,7 +44,7 @@ button:hover {
   background: #007acc;
 }
 
-#message {
+#content {
   margin: 20px 0;
   font-size: 16px;
 }
@@ -52,14 +52,15 @@ button:hover {
 </head>
 <body>
 
-<h1>🚀COFEE HAZE 78</h1>
+<h1>🚀 Mini App Telegram</h1>
 <p id="user"></p>
-<div id="message">Choisis une action :</div>
 
-<!-- Boutons -->
-<button onclick="showMessage('Tu as cliqué sur Bouton 1 !')">Bouton 1</button>
-<button onclick="showMessage('Tu as cliqué sur Bouton 2 !')">Bouton 2</button>
-<button onclick="showMessage('Tu as cliqué sur Bouton 3 !')">Bouton 3</button>
+<div id="content">
+  <p>Choisis une page :</p>
+  <button onclick="showPage('page1')">Page 1</button>
+  <button onclick="showPage('page2')">Page 2</button>
+  <button onclick="showPage('page3')">Page 3</button>
+</div>
 
 <script>
 const tg = window.Telegram.WebApp;
@@ -67,15 +68,42 @@ tg.ready();
 
 // Affiche le prénom de l'utilisateur
 const user = tg.initDataUnsafe.user;
-if (user) {
-  document.getElementById('user').innerText =
-    'Salut ' + user.first_name + ' !';
+if(user) {
+  document.getElementById('user').innerText = 'Salut ' + user.first_name + ' !';
 }
 
-// Fonction pour changer le texte quand on clique sur un bouton
-function showMessage(msg) {
-  document.getElementById('message').innerText = msg;
-  tg.showAlert(msg); // Popup Telegram
+// Pages de contenu
+const pages = {
+  page1: `
+    <h2>Page 1</h2>
+    <p>Bienvenue sur la première page !</p>
+    <button onclick="showMenu()">Retour au menu</button>
+  `,
+  page2: `
+    <h2>Page 2</h2>
+    <p>Voici la deuxième page avec des infos supplémentaires.</p>
+    <button onclick="showMenu()">Retour au menu</button>
+  `,
+  page3: `
+    <h2>Page 3</h2>
+    <p>Et voici la troisième page !</p>
+    <button onclick="showMenu()">Retour au menu</button>
+  `
+};
+
+// Fonction pour afficher une page
+function showPage(page) {
+  document.getElementById('content').innerHTML = pages[page];
+}
+
+// Fonction pour revenir au menu principal
+function showMenu() {
+  document.getElementById('content').innerHTML = `
+    <p>Choisis une page :</p>
+    <button onclick="showPage('page1')">Page 1</button>
+    <button onclick="showPage('page2')">Page 2</button>
+    <button onclick="showPage('page3')">Page 3</button>
+  `;
 }
 </script>
 
