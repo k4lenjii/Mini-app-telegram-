@@ -3,25 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mini App Telegram</title>
+<title>Mini App Telegram Améliorée</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 <style>
+:root {
+  --main-color: #2ea6ff;
+  --bg-color: #f0f4f8;
+  --text-color: #1a1a1a;
+  --button-radius: 12px;
+  --button-padding: 15px 25px;
+}
+
 body {
-  background: var(--tg-theme-bg-color);
-  color: var(--tg-theme-text-color);
-  font-family: Arial;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: Arial, sans-serif;
   text-align: center;
   padding: 20px;
 }
+
+h1 {
+  color: var(--main-color);
+}
+
 button {
-  padding: 15px 25px;
+  padding: var(--button-padding);
   font-size: 18px;
-  border-radius: 10px;
+  border-radius: var(--button-radius);
   border: none;
-  background: #2ea6ff;
+  margin: 10px;
+  cursor: pointer;
   color: white;
+  background: var(--main-color);
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #007acc;
+}
+
+#message {
+  margin: 20px 0;
+  font-size: 16px;
 }
 </style>
 </head>
@@ -29,21 +54,28 @@ button {
 
 <h1>🚀 Mini App Telegram</h1>
 <p id="user"></p>
+<div id="message">Choisis une action :</div>
 
-<button onclick="action()">Clique ici</button>
+<!-- Boutons -->
+<button onclick="showMessage('Tu as cliqué sur Bouton 1 !')">Bouton 1</button>
+<button onclick="showMessage('Tu as cliqué sur Bouton 2 !')">Bouton 2</button>
+<button onclick="showMessage('Tu as cliqué sur Bouton 3 !')">Bouton 3</button>
 
 <script>
 const tg = window.Telegram.WebApp;
 tg.ready();
 
+// Affiche le prénom de l'utilisateur
 const user = tg.initDataUnsafe.user;
 if (user) {
   document.getElementById('user').innerText =
-    'Salut ' + user.first_name;
+    'Salut ' + user.first_name + ' !';
 }
 
-function action() {
-  tg.showAlert('Ça marche ✅');
+// Fonction pour changer le texte quand on clique sur un bouton
+function showMessage(msg) {
+  document.getElementById('message').innerText = msg;
+  tg.showAlert(msg); // Popup Telegram
 }
 </script>
 
