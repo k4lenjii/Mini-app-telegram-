@@ -6,12 +6,13 @@
 <title>COFFEHAZE78🏆🚚</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin:0;
   min-height:100vh;
-  font-family:Arial, sans-serif;
+  font-family: 'Poppins', sans-serif; /* Police Smooth */
   color:white;
   display:flex;
   justify-content:center;
@@ -21,108 +22,112 @@ body {
 }
 
 .app{
-  width:100%;
+  width:90%;
   max-width:400px;
-  background: rgba(15,15,15,0.9);
-  border-radius:22px;
+  background: rgba(15, 15, 15, 0.85);
+  border-radius:28px;
   padding:22px;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+  margin: 20px 0;
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
 h1{
   text-align:center;
   font-size:24px;
+  font-weight: 700;
   margin-bottom:20px;
-  color:white;
-  text-shadow: 0 0 10px black; /* contour néon noir */
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
-h2{
-  text-align:center;
-  margin-bottom:15px;
-}
+h2{ text-align:center; color: #f1c40f; font-weight: 600; }
 
 button{
   width:100%;
-  padding:14px;
-  margin:8px 0;
+  padding:16px;
+  margin:10px 0;
   border:none;
-  border-radius:14px;
+  border-radius:18px;
   font-size:16px;
-  font-weight:bold;
+  font-weight:600;
+  font-family: 'Poppins', sans-serif;
   cursor:pointer;
   color:white;
-  text-shadow:0 0 5px #000;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes neonPulse {
-  0% { box-shadow: 0 0 8px currentColor; }
-  50% { box-shadow: 0 0 18px currentColor; }
-  100% { box-shadow: 0 0 8px currentColor; }
+@keyframes pulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0.2); }
+  70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(255,255,255,0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0); }
 }
 
-.yellow{ background:#c9a400; animation:neonPulse 2s infinite; }
-.darkgreen{ background:#006400; animation:neonPulse 2s infinite; }
-.red{ background:#c0392b; animation:neonPulse 2s infinite; }
-.green{ background:#25D366; animation:neonPulse 2s infinite; }
-.gray{ background:#333; }
+.yellow{ background: linear-gradient(135deg, #f1c40f, #c9a400); }
+.darkgreen{ background: linear-gradient(135deg, #2ecc71, #1b5e20); }
+.red{ background: linear-gradient(135deg, #e74c3c, #b71c1c); animation: pulse 2s infinite; }
+.green{ background: #25D366; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3); }
+.gray{ background: rgba(255,255,255,0.1); color: #ccc; }
 
-button:hover, button:active{ transform:scale(1.07); opacity:0.95; }
+button:active { transform: scale(0.95); }
 
 .product-card{
   background: rgba(255,255,255,0.05);
-  border-radius:15px;
-  padding:12px;
+  border-radius:22px;
+  padding:15px;
   text-align:center;
-  margin:15px 0;
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .product-card img{
   width:100%;
-  max-width:250px;
-  border-radius:12px;
-  margin-bottom:10px;
-  object-fit:cover;
-  box-shadow:none;
+  border-radius:16px;
+  margin-bottom:15px;
 }
 
 .product-section{
-  margin:15px 0;
-  padding:10px;
-  border-radius:12px;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.03);
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 16px;
 }
 
-.product-section h3{
-  margin:8px 0;
-  font-size:18px;
-}
-
-.grams{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  flex-wrap:wrap;
-  margin:8px 0;
-}
+.grams{ display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
 
 .gram-btn{
-  padding:8px 14px;
-  border-radius:10px;
-  border:1px solid #aaa;
-  background:transparent;
+  padding:10px 15px;
+  border-radius:12px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: transparent;
   color:white;
-  cursor:pointer;
-  font-weight:bold;
-  transition: all 0.2s;
+  font-size: 14px;
+  font-weight: 500;
+  width: auto;
 }
 
-.gram-btn.active{
-  background:#25D366;
-  border-color:#25D366;
-  transform:scale(1.1);
+.cart-summary {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 18px;
+  border-radius: 22px;
+  margin-top: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+.address-input {
+  width: 100%;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.3);
+  color: white;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+}
+
+.address-input:focus { border-color: #f1c40f; outline: none; }
 </style>
 </head>
 
@@ -130,72 +135,109 @@ button:hover, button:active{ transform:scale(1.07); opacity:0.95; }
 <div class="app" id="app"></div>
 
 <script>
-Telegram.WebApp.ready();
+const tg = window.Telegram.WebApp;
+tg.ready();
+tg.expand();
 
 const app = document.getElementById("app");
 const WHATSAPP_NUMBER = "33645681670";
 
-let currentGram="", currentPrice="", currentProduct="", currentImage="";
+let cart = [];
+let userAddress = "";
 
-/* ===== MENU ===== */
+function addToCart(name, gram, price) {
+    cart.push({ name, gram, price });
+    if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+    renderApp();
+}
+
+function clearCart() {
+    cart = [];
+    showMenu();
+}
+
 function showMenu(){
+  let cartHtml = "";
+  if(cart.length > 0) {
+      const totalBrut = cart.reduce((sum, i) => sum + i.price, 0);
+      const reduction = totalBrut >= 100 ? 10 : 0;
+      const totalFinal = totalBrut - reduction;
+
+      cartHtml = `
+        <div class="cart-summary">
+            <h3 style="margin:0 0 12px 0; font-size:18px;">🛒 Panier</h3>
+            <div style="margin-bottom:12px">
+                ${cart.map(i => `<div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px;opacity:0.9;"><span>${i.name} (${i.gram})</span><span>${i.price}€</span></div>`).join('')}
+            </div>
+            ${reduction > 0 ? `<div style="color:#2ecc71; font-size:13px; margin-bottom:8px;">✨ Réduction : -10€ appliquée</div>` : ''}
+            <div style="display:flex;justify-content:space-between; font-weight:700; border-top:1px solid rgba(255,255,255,0.1); padding-top:12px; font-size:18px;">
+                <span>Total</span><span>${totalFinal}€</span>
+            </div>
+            
+            <input type="text" class="address-input" id="addr" placeholder="Adresse de livraison..." oninput="userAddress=this.value">
+            
+            <button class="green" onclick="orderWhatsApp()">Commander via WhatsApp</button>
+            <button style="background:transparent; color:#888; font-size:12px; text-decoration:none;" onclick="clearCart()">Vider le panier</button>
+        </div>`;
+  }
+
   app.innerHTML = `
     <h1>COFFEHAZE78🏆🚚</h1>
-    <button class="yellow" onclick="showCategory('Jaune Prenium 🇲🇦🔥','https://i.imgur.com/tc39Nya.png',[['3g',10],['6g',20],['10g',30],['18g',50]])">JAUNE PATATE 🇲🇦🔥</button>
-    <button class="darkgreen" onclick="showCategory('CALI PURPLE US 🇺🇸🔥','https://i.imgur.com/HTKlFpX.png',[['50g',300],['100g',550]])">BEUH STATE 🇺🇸</button>
-    <button class="red" onclick="showCategory('Produits Puissants 🥵🔞','https://i.imgur.com/QhnxJ6E.png',[
+    <button class="yellow" onclick="showCategory('JAUNE PATATE 🇲🇦🔥','https://i.imgur.com/tc39Nya.png',[['3g',10],['6g',20],['10g',30],['18g',50]])">JAUNE PATATE 🇲🇦🔥</button>
+    <button class="darkgreen" onclick="showCategory('BEUH STATE 🇺🇸','https://i.imgur.com/HTKlFpX.png',[['50g',300],['100g',550]])">BEUH STATE 🇺🇸</button>
+    <button class="red" onclick="showCategory('PRODUITS PUISSANTS 🥵🔞','https://i.imgur.com/QhnxJ6E.png',[
       {name:'Frozen Prenium 🔥 ❄️', prices:[['2g',20],['5g',50],['10g',90]]},
       {name:'Static ⚡🔥', prices:[['2g',10],['4g',20],['10g',50],['25g',100]]},
       {name:'Piatella 🍯🔥', prices:[['1g',40]]}
     ])">PRODUITS PUISSANTS 🥵🔞</button>
+    <p style="font-size:11px; text-align:center; opacity:0.4; margin-top:20px;">Cadeau : -10€ dès 100€ d'achat</p>
+    ${cartHtml}
   `;
 }
 
-/* ===== CATÉGORIE ===== */
-function showCategory(title,img,items){
-  currentProduct=title;
-  currentGram="";
-  currentPrice="";
-  currentImage=img;
-
+function showCategory(title, img, items){
   let sections = '';
-  if(title === "Produits Puissants 🥵🔞"){
-    sections = items.map(item=>{
-      const priceBtns = item.prices.map(p=>`<button class="gram-btn" onclick="selectGram(this,'${p[0]}',${p[1]})">${p[0]} - ${p[1]}€</button>`).join('');
-      return `<div class="product-section">
-        <h3>${item.name}</h3>
-        <div class="grams">${priceBtns}</div>
-      </div>`;
+  if(title === "PRODUITS PUISSANTS 🥵🔞"){
+    sections = items.map(item => {
+      const priceBtns = item.prices.map(p => `<button class="gram-btn" onclick="addToCart('${item.name}','${p[0]}',${p[1]}); this.style.background='#2ecc71'; this.innerText='Pris ✅'"> ${p[0]} - ${p[1]}€</button>`).join('');
+      return `<div class="product-section"><h3 style="font-size:16px;margin:5px 0;font-weight:600;">${item.name}</h3><div class="grams">${priceBtns}</div></div>`;
     }).join('');
   } else {
-    sections = `<div class="grams">${items.map(g=>`<button class="gram-btn" onclick="selectGram(this,'${g[0]}',${g[1]})">${g[0]} - ${g[1]}€</button>`).join('')}</div>`;
+    sections = `<div class="grams" style="margin-top:15px">${items.map(g => `<button class="gram-btn" onclick="addToCart('${title}','${g[0]}',${g[1]}); this.style.background='#2ecc71'; this.innerText='Pris ✅'"> ${g[0]} - ${g[1]}€</button>`).join('')}</div>`;
   }
 
   app.innerHTML=`
-    <h2>${title}</h2>
+    <h2 style="font-size:20px;">${title}</h2>
     <div class="product-card">
       <img src="${img}" alt="${title}">
       ${sections}
     </div>
-    <button class="green" onclick="order()">Commander via WhatsApp</button>
     <button class="gray" onclick="showMenu()">⬅ Retour</button>
   `;
 }
 
-/* ===== SÉLECTION ===== */
-function selectGram(btn,gram,price){
-  document.querySelectorAll(".gram-btn").forEach(b=>b.classList.remove("active"));
-  btn.classList.add("active");
-  currentGram=gram;
-  currentPrice=price;
-}
+function renderApp() { if(document.querySelector('h1')) showMenu(); }
 
-/* ===== COMMANDE WHATSAPP ===== */
-function order(){
-  if(!currentGram){ alert("Choisis un grammage"); return; }
-  const message=`Commande COFFEHAZE78🏆🚚 ☕\nProduit : ${currentProduct}\nGrammage : ${currentGram}\nPrix : ${currentPrice}€`;
-  const url="https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(message);
-  window.open(url,"_blank");
+function orderWhatsApp(){
+  if(cart.length === 0) return;
+  if(!userAddress || userAddress.length < 5) {
+      alert("N'oublie pas d'indiquer ton adresse !");
+      return;
+  }
+  
+  let total = 0;
+  let detailMessage = "";
+  cart.forEach(i => {
+      detailMessage += `- ${i.name} (${i.gram}) : ${i.price}€\n`;
+      total += i.price;
+  });
+
+  const reduction = total >= 100 ? 10 : 0;
+  const finalTotal = total - reduction;
+
+  const message = `🚀 Commande COFFEHAZE78\n\n📍 Adresse : ${userAddress}\n\nDétails :\n${detailMessage}\n${reduction > 0 ? '🎁 Remise : -10€\n' : ''}💰 TOTAL : ${finalTotal}€`;
+  
+  window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message), "_blank");
 }
 
 showMenu();
