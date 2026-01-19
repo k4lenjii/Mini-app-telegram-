@@ -3,138 +3,202 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mini App Telegram Dark</title>
+<title>COFFEHAZE78🏆🚚</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 <style>
-:root {
-  --bg-color: #121212; /* Fond sombre */
-  --text-color: #f0f0f0; /* Texte clair */
-  --button-radius: 12px;
-  --button-padding: 15px 25px;
-  --button-yellow: #FFD700; /* Jaune Frappe */
-  --button-darkgreen: #008000;  /* BEUH STATES sombre */
-  --button-red: #FF3B30;    /* Produit Puissant */
-}
-
 body {
-  background: var(--bg-color);
-  color: var(--text-color);
-  font-family: Arial, sans-serif;
-  text-align: center;
-  padding: 20px;
+  margin:0;
+  min-height:100vh;
+  font-family:Arial, sans-serif;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: url("https://print.marcdaviet.com/wp-content/uploads/2020/10/Noire-de-Peuterey-NB-1100x1649.jpg") no-repeat center center fixed;
+  background-size: cover;
 }
 
-h1 {
-  color: #2ea6ff;
+.app{
+  width:100%;
+  max-width:400px;
+  background: rgba(15,15,15,0.9);
+  border-radius:22px;
+  padding:22px;
+  backdrop-filter: blur(5px);
 }
 
-button {
-  padding: var(--button-padding);
-  font-size: 18px;
-  border-radius: var(--button-radius);
-  border: none;
-  margin: 10px;
-  cursor: pointer;
-  color: white;
-  transition: background 0.2s;
+h1{
+  text-align:center;
+  font-size:24px;
+  margin-bottom:20px;
+  color:white;
+  text-shadow: 0 0 10px black; /* contour néon noir */
 }
 
-.button-yellow { background: var(--button-yellow); color: #000; }
-.button-yellow:hover { filter: brightness(0.85); }
-
-.button-darkgreen { background: var(--button-darkgreen); }
-.button-darkgreen:hover { filter: brightness(0.85); }
-
-.button-red { background: var(--button-red); }
-.button-red:hover { filter: brightness(0.85); }
-
-#content {
-  margin: 20px 0;
-  font-size: 16px;
+h2{
+  text-align:center;
+  margin-bottom:15px;
 }
 
-.page-text {
-  text-align: center;
-  line-height: 1.6;
-  margin: 15px auto;
-  max-width: 500px;
+button{
+  width:100%;
+  padding:14px;
+  margin:8px 0;
+  border:none;
+  border-radius:14px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  color:white;
+  text-shadow:0 0 5px #000;
+  transition: all 0.2s ease;
+}
+
+@keyframes neonPulse {
+  0% { box-shadow: 0 0 8px currentColor; }
+  50% { box-shadow: 0 0 18px currentColor; }
+  100% { box-shadow: 0 0 8px currentColor; }
+}
+
+.yellow{ background:#c9a400; animation:neonPulse 2s infinite; }
+.darkgreen{ background:#006400; animation:neonPulse 2s infinite; }
+.red{ background:#c0392b; animation:neonPulse 2s infinite; }
+.green{ background:#25D366; animation:neonPulse 2s infinite; }
+.gray{ background:#333; }
+
+button:hover, button:active{ transform:scale(1.07); opacity:0.95; }
+
+.product-card{
+  background: rgba(255,255,255,0.05);
+  border-radius:15px;
+  padding:12px;
+  text-align:center;
+  margin:15px 0;
+}
+
+.product-card img{
+  width:100%;
+  max-width:250px;
+  border-radius:12px;
+  margin-bottom:10px;
+  object-fit:cover;
+  box-shadow:none;
+}
+
+.product-section{
+  margin:15px 0;
+  padding:10px;
+  border-radius:12px;
+  background: rgba(255,255,255,0.05);
+}
+
+.product-section h3{
+  margin:8px 0;
+  font-size:18px;
+}
+
+.grams{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:8px 0;
+}
+
+.gram-btn{
+  padding:8px 14px;
+  border-radius:10px;
+  border:1px solid #aaa;
+  background:transparent;
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+  transition: all 0.2s;
+}
+
+.gram-btn.active{
+  background:#25D366;
+  border-color:#25D366;
+  transform:scale(1.1);
 }
 </style>
 </head>
+
 <body>
-
-<h1>COFFEHAZE78 🏆🚚</h1>
-<p id="user"></p>
-
-<div id="content">
-  <p>Choisis une page :</p>
-  <button class="button-yellow" onclick="showPage('page1')">Jaune Frappe 🔥🇲🇦</button>
-  <button class="button-darkgreen" onclick="showPage('page2')">BEUH STATES 🇺🇸</button>
-  <button class="button-red" onclick="showPage('page3')">Produit Puissant 🥵🔞</button>
-</div>
+<div class="app" id="app"></div>
 
 <script>
-const tg = window.Telegram.WebApp;
-tg.ready();
+Telegram.WebApp.ready();
 
-// Affiche le prénom de l'utilisateur
-const user = tg.initDataUnsafe.user;
-if(user) {
-  document.getElementById('user').innerText = 'Salut ' + user.first_name + ' !';
-}
+const app = document.getElementById("app");
+const WHATSAPP_NUMBER = "33645681670";
 
-// Pages avec texte centré
-const pages = {
-  page1: `<h2>Jaune Frappe 🔥🇲🇦</h2>
-  <p class="page-text">
-  3g = 10€<br>
-  6g = 20€<br>
-  10g = 30€<br>
-  18g = 50€
-  </p>
-  <button class="button-yellow" onclick="showMenu()">Retour au menu</button>`,
+let currentGram="", currentPrice="", currentProduct="", currentImage="";
 
-  page2: `<h2>BEUH STATES 🇺🇸</h2>
-  <p class="page-text">
-  50g = 300€<br>
-  100g = 550€
-  </p>
-  <button class="button-darkgreen" onclick="showMenu()">Retour au menu</button>`,
-
-  page3: `<h2>Produit Puissant 🥵🔞</h2>
-  <p class="page-text">
-  Frozen Prenium 🔥 ❄️ :<br>
-  2g = 20€<br>
-  5g = 50€<br>
-  10g = 90€<br><br>
-  Static ⚡🔥 :<br>
-  2g = 10€<br>
-  4g = 20€<br>
-  10g = 50€<br>
-  25g = 100€<br><br>
-  Piatella 🍯🔥 :<br>
-  1g = 40€
-  </p>
-  <button class="button-red" onclick="showMenu()">Retour au menu</button>`
-};
-
-// Afficher une page
-function showPage(page) {
-  document.getElementById('content').innerHTML = pages[page];
-}
-
-// Retour au menu principal
-function showMenu() {
-  document.getElementById('content').innerHTML = `
-    <p>Choisis une page :</p>
-    <button class="button-yellow" onclick="showPage('page1')">Jaune Frappe 🔥🇲🇦</button>
-    <button class="button-darkgreen" onclick="showPage('page2')">BEUH STATES 🇺🇸</button>
-    <button class="button-red" onclick="showPage('page3')">Produit Puissant 🥵🔞</button>
+/* ===== MENU ===== */
+function showMenu(){
+  app.innerHTML = `
+    <h1>COFFEHAZE78🏆🚚</h1>
+    <button class="yellow" onclick="showCategory('Jaune Prenium 🇲🇦🔥','https://i.imgur.com/tc39Nya.png',[['3g',10],['6g',20],['10g',30],['18g',50]])">JAUNE PATATE 🇲🇦🔥</button>
+    <button class="darkgreen" onclick="showCategory('CALI PURPLE US 🇺🇸🔥','https://i.imgur.com/HTKlFpX.png',[['50g',300],['100g',550]])">BEUH STATE 🇺🇸</button>
+    <button class="red" onclick="showCategory('Produits Puissants 🥵🔞','https://i.imgur.com/QhnxJ6E.png',[
+      {name:'Frozen Prenium 🔥 ❄️', prices:[['2g',20],['5g',50],['10g',90]]},
+      {name:'Static ⚡🔥', prices:[['2g',10],['4g',20],['10g',50],['25g',100]]},
+      {name:'Piatella 🍯🔥', prices:[['1g',40]]}
+    ])">PRODUITS PUISSANTS 🥵🔞</button>
   `;
 }
-</script>
 
+/* ===== CATÉGORIE ===== */
+function showCategory(title,img,items){
+  currentProduct=title;
+  currentGram="";
+  currentPrice="";
+  currentImage=img;
+
+  let sections = '';
+  if(title === "Produits Puissants 🥵🔞"){
+    sections = items.map(item=>{
+      const priceBtns = item.prices.map(p=>`<button class="gram-btn" onclick="selectGram(this,'${p[0]}',${p[1]})">${p[0]} - ${p[1]}€</button>`).join('');
+      return `<div class="product-section">
+        <h3>${item.name}</h3>
+        <div class="grams">${priceBtns}</div>
+      </div>`;
+    }).join('');
+  } else {
+    sections = `<div class="grams">${items.map(g=>`<button class="gram-btn" onclick="selectGram(this,'${g[0]}',${g[1]})">${g[0]} - ${g[1]}€</button>`).join('')}</div>`;
+  }
+
+  app.innerHTML=`
+    <h2>${title}</h2>
+    <div class="product-card">
+      <img src="${img}" alt="${title}">
+      ${sections}
+    </div>
+    <button class="green" onclick="order()">Commander via WhatsApp</button>
+    <button class="gray" onclick="showMenu()">⬅ Retour</button>
+  `;
+}
+
+/* ===== SÉLECTION ===== */
+function selectGram(btn,gram,price){
+  document.querySelectorAll(".gram-btn").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  currentGram=gram;
+  currentPrice=price;
+}
+
+/* ===== COMMANDE WHATSAPP ===== */
+function order(){
+  if(!currentGram){ alert("Choisis un grammage"); return; }
+  const message=`Commande COFFEHAZE78🏆🚚 ☕\nProduit : ${currentProduct}\nGrammage : ${currentGram}\nPrix : ${currentPrice}€`;
+  const url="https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(message);
+  window.open(url,"_blank");
+}
+
+showMenu();
+</script>
 </body>
 </html>
