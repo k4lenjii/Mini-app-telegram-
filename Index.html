@@ -6,300 +6,277 @@
 <title>COFFEHAZE78🏆</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;700;800&display=swap" rel="stylesheet">
 
 <style>
-/* Reset & Base */
-* { box-sizing: border-box; }
+/* --- VARIABLES --- */
+:root {
+    --gold: #f1c40f;
+    --gold-gradient: linear-gradient(135deg, #f1c40f 0%, #d4ac0d 100%);
+    --green: #2ecc71;
+    --red: #ff4757;
+    --blue: #3498db;
+    --bg-black: #080808;
+    --card-bg: rgba(20, 20, 20, 0.85);
+    --border-light: rgba(255, 255, 255, 0.1);
+    --radius-xl: 25px;
+}
+
+/* --- BASE --- */
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 body {
-  margin:0;
-  padding:0;
-  min-height:100vh;
-  font-family: 'Poppins', sans-serif;
-  color:white;
-  background: url("https://print.marcdaviet.com/wp-content/uploads/2020/10/Noire-de-Peuterey-NB-1100x1649.jpg") no-repeat center center fixed;
-  background-size: cover;
-  overflow-x: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    margin: 0; padding: 0; min-height: 100vh;
+    font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-black); color: white;
+    display: flex; justify-content: center; overflow-x: hidden;
 }
 
-/* CONTENEUR NEIGE */
-#snow-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-.snowflake {
-  position: absolute;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-  animation: fall linear infinite;
-}
-@keyframes fall {
-  0% { transform: translateY(-10vh) translateX(0); opacity: 0; }
-  10% { opacity: 0.8; }
-  100% { transform: translateY(110vh) translateX(50px); opacity: 0; }
+/* Background Design */
+.bg-wall {
+    position: fixed; inset: 0; z-index: -2;
+    background: url("https://print.marcdaviet.com/wp-content/uploads/2020/10/Noire-de-Peuterey-NB-1100x1649.jpg") center/cover no-repeat;
+    opacity: 0.4; filter: grayscale(100%);
 }
 
-/* ÉCRAN DE CHARGEMENT */
-#loading-screen {
-    position: fixed;
-    inset: 0;
-    background: #000;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    transition: opacity 0.5s ease;
+/* --- APP CONTAINER --- */
+.app-container {
+    width: 100%; max-width: 440px;
+    padding: 20px 20px 110px 20px;
+    position: relative; z-index: 10;
 }
-.loader {
-    width: 40px; height: 40px;
-    border: 4px solid #333;
-    border-top: 4px solid #f1c40f;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-/* NOTIFICATION TOAST (VIOLET/PINK & CENTRÉ) */
+header { text-align: center; margin: 30px 0 40px 0; }
+h1 {
+    font-size: 32px; font-weight: 800; margin: 0;
+    background: linear-gradient(to bottom, #ffffff 30%, #a0a0a0 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    letter-spacing: -1.5px; text-transform: uppercase;
+}
+.subtitle { color: var(--gold); font-size: 10px; letter-spacing: 4px; font-weight: 700; margin-top: 8px; opacity: 0.8; }
+
+/* BENTO CARDS */
+.grid-menu { display: grid; gap: 18px; }
+
+.card-menu {
+    background: var(--card-bg);
+    backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+    border: 1px solid var(--border-light); border-radius: var(--radius-xl);
+    padding: 22px; display: flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-menu:active { transform: scale(0.96); }
+
+.card-menu h3 { margin: 0; font-size: 18px; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
+.card-menu p { margin: 4px 0 0 0; font-size: 12px; color: #999; }
+.card-icon { 
+    width: 50px; height: 50px; background: rgba(255,255,255,0.05); 
+    border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 22px;
+}
+
+.b-gold { border-left: 4px solid var(--gold); }
+.b-blue { border-left: 4px solid var(--blue); }
+.b-red { border-left: 4px solid var(--red); }
+
+/* PRODUCT VIEW */
+.product-view { animation: fadeInUp 0.4s ease-out; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+.product-img {
+    width: 100%; border-radius: 20px; margin-bottom: 25px;
+    border: 1px solid var(--border-light); box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+.sub-product {
+    background: rgba(255,255,255,0.03); border-radius: 20px; padding: 18px; margin-bottom: 18px;
+    border: 1px solid var(--border-light);
+}
+.sub-title { font-size: 15px; font-weight: 700; color: var(--gold); margin-bottom: 12px; text-transform: uppercase; }
+
+/* CHIPS - PRIX ET GRAMMAGES */
+.chips-container { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.chip {
+    background: rgba(0,0,0,0.6); border: 1px solid var(--border-light);
+    padding: 16px; border-radius: 16px; color: #fff; font-size: 14px; font-weight: 600;
+    text-align: center; transition: all 0.2s;
+}
+.chip.added { background: var(--green); color: #000; border-color: var(--green); box-shadow: 0 0 15px rgba(46, 213, 115, 0.4); }
+
+/* FOOTER STICKY */
+.sticky-footer {
+    position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
+    width: 90%; max-width: 400px;
+    background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(20px);
+    border: 1px solid var(--gold); border-radius: 50px;
+    padding: 18px 25px; display: flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8); z-index: 100;
+}
+
+/* PANIER */
+.cart-panel {
+    background: var(--card-bg); padding: 25px; border-radius: var(--radius-xl);
+    border: 1px solid var(--border-light); margin-top: 30px;
+}
+.input-field {
+    width: 100%; background: rgba(0,0,0,0.5); border: 1px solid var(--border-light);
+    color: white; padding: 16px; border-radius: 18px; margin-bottom: 12px; font-family: inherit; font-size: 14px;
+}
+.btn-order {
+    width: 100%; padding: 20px; background: var(--gold-gradient); color: black;
+    font-weight: 800; border-radius: 20px; border: none; font-size: 16px; cursor: pointer;
+    box-shadow: 0 10px 25px rgba(241, 196, 15, 0.3); margin-top: 10px;
+}
+
+/* SNOW & TOAST */
+#snow { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+.flake { position: absolute; background: white; border-radius: 50%; opacity: 0.5; animation: fall linear infinite; }
+@keyframes fall { to { transform: translateY(100vh); } }
+
 #toast {
-    position: fixed;
-    top: 30px;
-    left: 50%;
-    transform: translateX(-50%) translateY(-200%);
-    background: linear-gradient(135deg, #8e44ad, #d81b60); /* Dégradé Violet vers Rose */
-    min-width: 200px;
-    height: 45px; /* Hauteur fixe pour aider au centrage */
-    display: flex; /* Flexbox pour le centrage interne */
-    align-items: center; /* Centrage vertical */
-    justify-content: center; /* Centrage horizontal */
-    padding: 0 20px;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 14px;
-    z-index: 10000;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 8px 25px rgba(216, 27, 96, 0.4);
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* L'APPLICATION */
-.app {
-  position: relative;
-  z-index: 10;
-  width: 92%;
-  max-width: 400px;
-  background: rgba(10, 10, 10, 0.92);
-  border-radius: 30px;
-  padding: 25px;
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.1);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-  margin: 20px auto;
-}
-
-h1 { text-align:center; font-size:24px; font-weight:700; margin-bottom:20px; }
-h2 { text-align:center; color: #f1c40f; margin-bottom: 20px; }
-
-button {
-  width:100%; padding:16px; margin:10px 0;
-  border:none; border-radius:18px;
-  font-size:16px; font-weight:600;
-  font-family: 'Poppins', sans-serif;
-  cursor:pointer; color:white;
-  transition: transform 0.1s;
-}
-button:active { transform: scale(0.96); }
-
-.yellow { background: #c9a400; color: #000; }
-.darkgreen { background: #1b5e20; }
-.red { background: #b71c1c; }
-.green { background: #25D366; }
-.gray { background: rgba(255,255,255,0.15); }
-
-/* PANIER & PROMO */
-.promo-info { font-size: 11px; margin-bottom: 5px; display: block; text-align: center;}
-.progress-bar { background: #222; height: 8px; border-radius: 10px; margin-bottom: 15px; overflow: hidden; }
-.progress-fill { background: #f1c40f; height: 100%; width: 0%; transition: width 0.5s ease; }
-
-.product-card { background: rgba(255,255,255,0.03); border-radius:25px; padding:15px; }
-.product-card img { width:100%; border-radius:20px; margin-bottom:15px; }
-
-.gram-btn {
-  padding:10px 14px; border-radius:12px;
-  border: 1px solid rgba(255,255,255,0.2);
-  background: transparent; color:white;
-  font-size: 13px; width: auto;
-}
-
-.cart-summary { background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 25px; margin-top: 20px; }
-
-.input-style {
-  width: 100%; padding: 14px; margin: 8px 0;
-  border-radius: 14px; border: 1px solid rgba(255,255,255,0.1);
-  background: #000; color: white;
-  font-family: 'Poppins', sans-serif; font-size: 14px;
+    position: fixed; top: 30px; left: 50%; transform: translate(-50%, -200%);
+    background: linear-gradient(135deg, #8e44ad, #d81b60);
+    padding: 14px 30px; border-radius: 50px; font-weight: 700; z-index: 9999;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 </style>
 </head>
 <body>
 
-<div id="toast">Ajouté ! 🛒</div>
+<div class="bg-wall"></div>
+<div id="snow"></div>
+<div id="toast">Produit ajouté !</div>
 
-<div id="loading-screen">
-    <div class="loader"></div>
-    <p style="margin-top:15px; font-weight:600;">COFFEHAZE78🏆</p>
-</div>
-
-<div id="snow-container"></div>
-
-<div class="app" id="app"></div>
+<div class="app-container" id="app"></div>
+<div id="footer-box"></div>
 
 <script>
 const tg = window.Telegram.WebApp;
-tg.ready();
-tg.expand();
+tg.ready(); tg.expand();
 
-// NEIGE
-function createSnowflake() {
-  const container = document.getElementById('snow-container');
-  if(!container) return;
-  const flake = document.createElement('div');
-  flake.classList.add('snowflake');
-  const size = Math.random() * 3 + 1;
-  flake.style.width = size + 'px';
-  flake.style.height = size + 'px';
-  flake.style.left = Math.random() * 100 + 'vw';
-  flake.style.animationDuration = Math.random() * 5 + 5 + 's';
-  flake.style.animationDelay = Math.random() * 2 + 's';
-  container.appendChild(flake);
-  setTimeout(() => flake.remove(), 7000);
-}
-setInterval(createSnowflake, 250);
+// Neige
+setInterval(() => {
+    const s = document.getElementById('snow');
+    const f = document.createElement('div');
+    f.classList.add('flake');
+    const size = Math.random()*2+2;
+    f.style.width=f.style.height=`${size}px`;
+    f.style.left=`${Math.random()*100}vw`;
+    f.style.animationDuration=`${Math.random()*4+6}s`;
+    s.appendChild(f);
+    setTimeout(()=>f.remove(), 10000);
+}, 300);
 
-// CHARGEMENT
-setTimeout(() => {
-    const loader = document.getElementById('loading-screen');
-    if(loader) {
-        loader.style.opacity = '0';
-        setTimeout(() => loader.remove(), 500);
-    }
-}, 1200);
-
-const app = document.getElementById("app");
-const WHATSAPP_NUMBER = "33645681670";
 let cart = [];
 let userAddress = "";
 let deliveryTime = "Dès que possible";
+let view = 'home';
 
-function showToast(text) {
-    const t = document.getElementById("toast");
-    t.innerHTML = `<span>${text}</span>`; // Encapsulé pour le centrage
-    t.style.transform = "translateX(-50%) translateY(0)";
-    setTimeout(() => { t.style.transform = "translateX(-50%) translateY(-200%)"; }, 2000);
+function render() {
+    const app = document.getElementById('app');
+    const footer = document.getElementById('footer-box');
+    
+    if(view === 'home') {
+        footer.innerHTML = '';
+        let cartHtml = '';
+        if(cart.length > 0) {
+            const total = cart.reduce((a,b)=>a+b.price, 0);
+            const promo = total >= 100;
+            cartHtml = `
+                <div class="cart-panel">
+                    <h3 style="margin-top:0; color:var(--gold)">🛒 PANIER</h3>
+                    <div style="max-height:120px; overflow-y:auto; margin-bottom:20px;">
+                        ${cart.map(i => `<div style="display:flex;justify-content:space-between;font-size:14px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05)"><span>${i.name} (${i.gram})</span><b>${i.price}€</b></div>`).join('')}
+                    </div>
+                    <div style="display:flex;justify-content:space-between;font-weight:800;font-size:20px;margin-bottom:20px;">
+                        <span>TOTAL</span><span>${promo ? total-10 : total}€</span>
+                    </div>
+                    <input class="input-field" placeholder="📍 Ton adresse..." oninput="userAddress=this.value" value="${userAddress}">
+                    <select class="input-field" onchange="deliveryTime=this.value">
+                        <option value="Dès que possible">🚀 Dès que possible</option>
+                        <option value="Entre 18h-19h">🌙 Entre 18h-19h</option>
+                        <option value="Préciser en MP">📅 Préciser en MP</option>
+                    </select>
+                    <button class="btn-order" onclick="order()">VALIDER LA COMMANDE</button>
+                    <p onclick="cart=[];render()" style="text-align:center;font-size:11px;color:#555;margin-top:15px;cursor:pointer">Vider le panier</p>
+                </div>`;
+        }
+        
+        app.innerHTML = `
+            <header><h1>COFFEHAZE78</h1><div class="subtitle">PREMIUM SELECTION</div></header>
+            <div class="grid-menu">
+                <div class="card-menu b-gold" onclick="goProduct('JAUNE PATATE 🇲🇦🔥','https://i.imgur.com/tc39Nya.png',[['3g',10],['6g',20],['10g',30],['18g',50]])">
+                    <div><h3>JAUNE PATATE</h3><p>Marocain d'exception</p></div><div class="card-icon">🇲🇦</div>
+                </div>
+                <div class="card-menu b-blue" onclick="goProduct('BEUH STATE 🇺🇸','https://i.imgur.com/HTKlFpX.png',[['50g',300],['100g',550]])">
+                    <div><h3>BEUH STATE</h3><p>Importation USA</p></div><div class="card-icon">🇺🇸</div>
+                </div>
+                <div class="card-menu b-red" onclick="goProduct('PRODUITS PUISSANTS 🥵🔞','https://i.imgur.com/QhnxJ6E.png',[{name:'Frozen 🔥 ❄️',p:[['2g',20],['5g',50],['10g',90]]},{name:'Static ⚡🔥',p:[['2g',10],['4g',20],['10g',50],['25g',100]]},{name:'Piatella 🍯🔥',p:[['1g',40]]}])">
+                    <div><h3>PUISSANTS 🔞</h3><p>Frozen, Static, Piatella</p></div><div class="card-icon">🔥</div>
+                </div>
+            </div>
+            ${cartHtml}`;
+    }
 }
 
-function addToCart(name, gram, price) {
-    cart.push({ name, gram, price });
-    if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-    showToast(`${name} ajouté ! ✅`);
-    renderApp();
-}
+function goProduct(title, img, items) {
+    view = 'product';
+    const app = document.getElementById('app');
+    
+    const getChips = (name, prices) => prices.map(p => `<div class="chip" onclick="add(this,'${name}','${p[0]}',${p[1]})">${p[0]} - ${p[1]}€</div>`).join('');
 
-function clearCart() { cart = []; showMenu(); }
+    let content = '';
+    if(items[0].name) {
+        content = items.map(i => `<div class="sub-product"><div class="sub-title">${i.name}</div><div class="chips-container">${getChips(i.name, i.p)}</div></div>`).join('');
+    } else {
+        content = `<div class="chips-container" style="margin-top:20px;">${getChips(title, items)}</div>`;
+    }
 
-function showMenu(){
-  let cartHtml = "";
-  if(cart.length > 0) {
-      const totalBrut = cart.reduce((sum, i) => sum + i.price, 0);
-      const reduction = totalBrut >= 100 ? 10 : 0;
-      const totalFinal = totalBrut - reduction;
-      const percent = Math.min((totalBrut / 100) * 100, 100);
-
-      cartHtml = `
-        <div class="cart-summary">
-            <span class="promo-info">${totalBrut >= 100 ? '🔥 Réduction -10€ appliquée !' : `Encore <b>${100 - totalBrut}€</b> pour la promo`}</span>
-            <div class="progress-bar"><div class="progress-fill" style="width:${percent}%"></div></div>
-            
-            <div style="margin-bottom:15px; max-height: 120px; overflow-y: auto;">
-                ${cart.map(i => `<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span>${i.name} (${i.gram})</span><span>${i.price}€</span></div>`).join('')}
-            </div>
-            
-            <div style="display:flex;justify-content:space-between; font-weight:700; border-top:1px solid rgba(255,255,255,0.1); padding-top:10px; font-size:18px;">
-                <span>Total</span><span>${totalFinal}€</span>
-            </div>
-
-            <input type="text" class="input-style" placeholder="📍 Adresse de livraison..." oninput="userAddress=this.value" value="${userAddress}">
-            
-            <select class="input-style" onchange="deliveryTime=this.value">
-                <option value="Dès que possible">🚀 Dès que possible</option>
-                <option value="Ce soir (18h-20h)">🌙 Ce soir (18h-20h)</option>
-                <option value="Plus tard">📅 Plus tard (préciser en MP)</option>
-            </select>
-
-            <button class="green" onclick="orderWhatsApp()">Commander via WhatsApp</button>
-            <button style="background:transparent; color:#555; font-size:11px;" onclick="clearCart()">Vider le panier</button>
+    app.innerHTML = `
+        <div class="product-view">
+            <p onclick="view='home';render()" style="color:var(--gold);font-weight:700;margin-bottom:20px;cursor:pointer">⬅ RETOUR MENU</p>
+            <h2 style="text-align:center;letter-spacing:-1px">${title}</h2>
+            <img src="${img}" class="product-img">
+            ${content}
         </div>`;
-  }
-
-  app.innerHTML = `
-    <h1>COFFEHAZE78🏆🚚</h1>
-    <button class="yellow" onclick="showCategory('JAUNE PATATE 🇲🇦🔥','https://i.imgur.com/tc39Nya.png',[['3g',10],['6g',20],['10g',30],['18g',50]])">JAUNE PATATE 🇲🇦🔥</button>
-    <button class="darkgreen" onclick="showCategory('BEUH STATE 🇺🇸','https://i.imgur.com/HTKlFpX.png',[['50g',300],['100g',550]])">BEUH STATE 🇺🇸</button>
-    <button class="red" onclick="showCategory('PRODUITS PUISSANTS 🥵🔞','https://i.imgur.com/QhnxJ6E.png',[
-      {name:'Frozen 🔥 ❄️', prices:[['2g',20],['5g',50],['10g',90]]},
-      {name:'Static ⚡🔥', prices:[['2g',10],['4g',20],['10g',50],['25g',100]]},
-      {name:'Piatella 🍯🔥', prices:[['1g',40]]}
-    ])">PRODUITS PUISSANTS 🥵🔞</button>
-    ${cartHtml}
-  `;
+    updateFooter();
 }
 
-function showCategory(title, img, items){
-  let sections = '';
-  if(title === "PRODUITS PUISSANTS 🥵🔞"){
-    sections = items.map(item => {
-      const priceBtns = item.prices.map(p => `<button class="gram-btn" onclick="addToCart('${item.name}','${p[0]}',${p[1]})"> ${p[0]} - ${p[1]}€</button>`).join('');
-      return `<div style="margin:10px 0; background:rgba(255,255,255,0.02); padding:12px; border-radius:15px;">
-                <h3 style="font-size:14px; margin:0 0 10px 0; font-weight:600;">${item.name}</h3>
-                <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">${priceBtns}</div>
-              </div>`;
-    }).join('');
-  } else {
-    sections = `<div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:15px;">
-        ${items.map(g => `<button class="gram-btn" onclick="addToCart('${title}','${g[0]}',${g[1]})"> ${g[0]} - ${g[1]}€</button>`).join('')}
+function add(btn, name, gram, price) {
+    cart.push({name, gram, price});
+    if(tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
+    btn.classList.add('added');
+    const old = btn.innerText; btn.innerText = "AJOUTÉ ✓";
+    setTimeout(() => { btn.classList.remove('added'); btn.innerText = old; }, 800);
+    
+    const t = document.getElementById('toast');
+    t.innerText = `🛒 ${name} ajouté`;
+    t.style.transform = "translate(-50%, 0)";
+    setTimeout(() => t.style.transform = "translate(-50%, -200%)", 2000);
+    updateFooter();
+}
+
+function updateFooter() {
+    const f = document.getElementById('footer-box');
+    if(view === 'home' || cart.length === 0) { f.innerHTML = ''; return; }
+    const total = cart.reduce((a,b)=>a+b.price,0);
+    f.innerHTML = `<div class="sticky-footer" onclick="view='home';render()">
+        <span style="font-size:13px;opacity:0.8">${cart.length} article(s)</span>
+        <span style="font-weight:800">VOIR LE PANIER (${total >= 100 ? total-10 : total}€) ➔</span>
     </div>`;
-  }
-
-  app.innerHTML=`
-    <h2>${title}</h2>
-    <div class="product-card"><img src="${img}" alt="${title}">${sections}</div>
-    <button class="gray" onclick="showMenu()">⬅ Retour</button>
-  `;
 }
 
-function renderApp() { if(document.querySelector('h1')) showMenu(); }
-
-function orderWhatsApp(){
-  if(cart.length === 0) return;
-  if(!userAddress || userAddress.length < 5) { tg.showAlert("⚠️ Précise ton adresse !"); return; }
-  let total = 0; let detailMessage = "";
-  cart.forEach(i => { detailMessage += `- ${i.name} (${i.gram}) : ${i.price}€\n`; total += i.price; });
-  const reduction = total >= 100 ? 10 : 0;
-  const finalTotal = total - reduction;
-  const message = `🚀 *COMMANDE COFFEHAZE78*\n\n📍 *ADRESSE :* ${userAddress}\n🕒 *CRÉNEAU :* ${deliveryTime}\n\n📦 *DÉTAILS :*\n${detailMessage}\n${reduction > 0 ? '🎁 *REMISE :* -10€\n' : ''}💰 *TOTAL : ${finalTotal}€*`;
-  window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message), "_blank");
+function order() {
+    if(!userAddress || userAddress.length < 3) { tg.showAlert("📍 Précise ton adresse !"); return; }
+    let m = `🚀 *COMMANDE COFFEHAZE78*\n\n`;
+    cart.forEach(i => m += `▪️ ${i.name} (${i.gram}) : ${i.price}€\n`);
+    const t = cart.reduce((a,b)=>a+b.price,0);
+    const r = t >= 100 ? 10 : 0;
+    m += `\n🎁 REMISE : ${r}€\n💰 *TOTAL : ${t-r}€*\n\n📍 ADRESSE : ${userAddress}\n🕒 CRÉNEAU : ${deliveryTime}`;
+    window.open("https://wa.me/33645681670?text=" + encodeURIComponent(m));
 }
 
-showMenu();
+render();
 </script>
 </body>
 </html>
